@@ -24,5 +24,34 @@ Notes on the query
 */
 
 
+-- WHERE with JOIN 
+/*
+Task: who is commenting their own photos? 
+Users can comment on photos that they posted. List the url and contents for every photo/comment where this occured
+*/ 
 
+-- Check the tables of interest to better understand the structure and the relationship between the tables
+SELECT * FROM photos;
+SELECT * FROM comments; 
+
+/*
+Notes on tables of interest
+- url is stored in photos table in column called 'url'
+- photos table references to users table with a column called 'user_id'
+
+- contents is stored in comments table in a column called 'contents'
+- comments table references to users table with a column called 'user_id'
+- comments table references to photos table with a column called 'photo_id'
+
+- the user_id column allows to compare the photo owner with the commenter, while photo_id connets each comment to its photo 
+*/ 
+
+-- JOIN connects each comment to the photo it belongs 
+-- filters for comments where the commenter is also the photo owner 
+-- SELECT clause returns requested URL and comment content 
+SELECT p.url, c.contents
+FROM photos AS p 
+	JOIN comments AS c 
+	ON p.id = c.photo_id 
+	WHERE p.user_id = c.user_id; 
 
