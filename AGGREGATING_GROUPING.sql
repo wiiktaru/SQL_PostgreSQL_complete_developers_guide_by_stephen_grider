@@ -54,3 +54,41 @@ FROM comments
 WHERE photo_id < 3 
 GROUP BY photo_id 
 HAVING COUNT(*) > 2; 
+
+
+-- GROUP BYY 
+/*
+Task: Write a query to print the number of paid and upnaid orders
+*/ 
+
+
+-- Check the orders table to better uderstand the structure
+SELECT * FROM orders LIMIT 10;
+
+
+/*
+Notes on orders table 
+- The info of 'paid/unpaid' is stored in a column called 'paid'. boolean. 'true' = paid, 'false' = unpaid 
+- Each row in an orders table is one individual order
+*/ 
+
+-- uses GROUP BY to group the orders by wheter the order is paid or not 
+-- Uses aggregation function COUNT(*) to count the number of orders in each group 
+SELECT	paid, 
+		COUNT(*)
+FROM orders
+GROUP BY paid; 
+
+-- result is 272 falsen and 277 true 
+
+-- Check how many orders are in the orders table 
+SELECT	COUNT(*)
+FROM orders; 
+
+-- result is 550 
+
+-- Check if the counted paid/unpaid orders equal to all the orders in orders table 
+SELECT 273 + 277: 
+
+-- results is also 550 
+	
