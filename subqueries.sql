@@ -125,3 +125,34 @@ WHERE price > (
 	SELECT AVG(price)
 	FROM products
 );
+
+
+-- Another subquery in WHERE
+/*
+Task: show the name of all products with a price greater than the average product price 
+*/
+
+--Check the products table to better understand the structure 
+SELECT * 
+FROM products 
+LIMIT 10; 
+
+/*
+Notes
+- name is stored in a column called "name"
+- price is stored in a column called "price"
+*/
+
+--Aggregation function AVG calulates the required average price from all the products 
+SELECT AVG(price)
+FROM products; 
+
+--The inner query calculates one average value from products table´s price column
+--The outer query takes that one single value and uses it in comparison operator to filter rows from the products table 
+--Returns name of the products where the required comparison is true 
+SELECT name 
+FROM products 
+WHERE price > (
+	SELECT AVG(price)
+	FROM products
+); 
