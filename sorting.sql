@@ -31,3 +31,28 @@ WHERE price < 0 OR price IS NULL;
 SELECT * 
 FROM products 
 ORDER BY price; 
+
+
+-- Primary and secondary sorting 
+/*
+Task: Print all the details about different products. Sort them by price and weight
+
+Notes on task: 
+- does not specify data-quality validation rules
+*/ 
+
+-- Check a set of data from table of interest to better understand the structure 
+SELECT * FROM products
+LIMIT 10; 
+
+/*
+Notes from table of interest:
+- price is stored in a column called "price"
+- weight is stored in a column called "weight"
+*/
+
+-- Returns all the product columns. 
+-- The results are sorted by price first. For rows with equal prices, weight determines the secondary order
+-- The task does not specify a sort direction, so ascending order is used 
+SELECT * FROM products 
+ORDER BY price ASC, weight ASC;
