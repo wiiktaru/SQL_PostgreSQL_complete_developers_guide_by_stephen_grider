@@ -25,6 +25,7 @@ SELECT name, price, price / (
 ) AS price_ratio
 FROM phones; 
 
+
 -- Subquery in a FROM 
 
 /*
@@ -59,3 +60,36 @@ FROM (
 	FROM orders
 	GROUP BY user_id
 ) AS o; 
+
+
+-- Another subquery in a FROM 
+
+/*
+Task: Calculate the average price of phones for each manufacturer. Then print the highest average price. Rename this value to max_average_price
+*/
+
+--Check the phones table to better understand the structure 
+SELECT * 
+FROM phones
+LIMIT 5;
+
+/*
+Notes on phones table
+--column called ”manufacturer” identifies manufacturer
+--column called ”price” saves the price data 
+*/
+
+--GROUP BY creates a group for each individual manufacturer and signs every phone to its manufacturer 
+--Aggregation function AVG calculates the required average price of phone for every subgroup
+SELECT manufacturer, AVG(price) AS avg_price
+FROM phones 
+GROUP BY manufacturer;
+
+--The inner query calculates one average per manufacturer. The outer query applies MAX() to those average values to return the highest manufacturer-level average
+--Result is stored in an alias column max_average_price as required 
+SELECT MAX(avg_price) AS max_average_price 
+FROM (
+	SELECT manufacturer, AVG(price) AS avg_price
+	FROM phones
+	GROUP BY manufacturer
+) AS manufacturer_averages;
