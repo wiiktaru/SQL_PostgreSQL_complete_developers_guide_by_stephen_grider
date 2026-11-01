@@ -156,3 +156,37 @@ WHERE price > (
 	SELECT AVG(price)
 	FROM products
 ); 
+
+-- Another subquery in WHERE 
+/*
+Task: write a query that prints out the name and price of phones that have a price greater than the Samsung S5620 Monte 
+*/
+
+--Check the table of interest to better understand the structure 
+SELECT * 
+FROM phones
+LIMIT 5; 
+
+/*
+Notes
+- name is stored in a column called "name"
+- price is stored in a column called "price"
+*/
+
+--Find the phone of interest and the price of that phone as this is used with the comparison operator 
+SELECT price
+FROM phones 
+WHERE manufacturer = 'Samsung' AND name = 'S5620 Monte';
+
+--Note: returns one single column with one single value of 250 
+
+--The inner query returns a price for the required phone 
+--The outer query takes that single value and uses it in comparison operator to filter rows from the phones table where price is greater
+--Returns name and price from phones where the required comparison is true 
+SELECT name, price 
+FROM phones
+WHERE price > (
+	SELECT price
+	FROM phones 
+	WHERE manufacturer = 'Samsung' AND name = 'S5620 Monte'
+);
